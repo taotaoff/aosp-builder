@@ -36,7 +36,6 @@ repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune 
 
 tg_sendText "Downloading trees"
 git clone https://github.com/MizuNotCool/android_device_samsung_a10s device/samsung/a10s
-git clone https://github.com/MizuNotCool/android_kernel_samsung_a10s kernel/samsung/mt6765 --depth=1
 git clone https://github.com/MizuNotCool/suzu_vendor_samsung_a10s vendor/samsung/a10s
 
 tg_sendText "Lunching"
