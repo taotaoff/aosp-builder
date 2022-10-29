@@ -35,10 +35,9 @@ repo init --no-repo-verify --depth=1 -u https://github.com/Corvus-R/android_mani
 repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
 
 tg_sendText "Downloading trees"
-git clone https://github.com/Gabriel260/android_hardware_samsung-2 hardware/samsung
-git clone https://github.com/geckyn/android_kernel_samsung_exynos7885 kernel/samsung/exynos7885 --depth=1
-git clone https://github.com/Gabriel260/android_device_samsung_a10-common -b corvus device/samsung
-git clone https://github.com/Gabriel260/proprietary_vendor_samsung_a10-common vendor/samsung
+git clone https://github.com/MizuNotCool/android_device_samsung_a10s device/samsung/a10s
+git clone https://github.com/MizuNotCool/android_kernel_samsung_a10s kernel/samsung/mt6765 --depth=1
+git clone https://github.com/MizuNotCool/suzu_vendor_samsung_a10s vendor/samsung/a10s
 
 tg_sendText "Lunching"
 # Normal build steps
@@ -56,11 +55,12 @@ tg_sendText "Starting Compilation.."
 mka bacon -j10 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom to gdrive"
-rclone copy out/target/product/a10s/*Unofficial* aosp:final -P || rclone copy out/target/product/a10s/*Alpha*.zip aosp:final -P
+curl bashupload.com -T out/target/product/a10s/*.zip aosp:final -P | tee download-link.txt
 
 (ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10s/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
 tg_sendFile "build.txt"
+tg_sendFile "download-link.txt"
 
 #tg_sendText "Uploading new ccache to gdrive"
 #cd /tmp
