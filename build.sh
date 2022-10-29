@@ -31,7 +31,7 @@ echo "$user_credentials" > ~/.git-credentials && git config --global credential.
 tg_sendText "Syncing rom"
 mkdir -p /tmp/rom
 cd /tmp/rom
-repo init --no-repo-verify --depth=1 -u https://github.com/Corvus-R/android_manifest.git -b 11 -g default,-device,-mips,-darwin,-notdefault
+repo init --no-repo-verify --depth=1 -u https://github.com/LineageOS/android.git -b lineage-17.1 -g default,-device,-mips,-darwin,-notdefault
 repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
 
 tg_sendText "Downloading trees"
@@ -43,6 +43,13 @@ tg_sendText "Lunching"
 # Normal build steps
 . build/envsetup.sh
 lunch lineage_a10s-userdebug
+export ALLOW_MISSING_DEPENDENCIES=true
+export KBUILD_BUILD_USER=ItzKaguya
+export KBUILD_BUILD_HOST=ItzKaguya-PC
+export BUILD_USERNAME=ItzKaguya
+export BUILD_HOSTNAME=ItzKaguya-PC
+export WITH_SU=false
+export WITH_GMS=false
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
