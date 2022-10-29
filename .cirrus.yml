@@ -27,5 +27,7 @@ task:
       memory: 32G # So that we can have ram when needed, 32G highest. 4G per CPU you use.
     monitor_background_script: # To monitor ccache and machine status every minute, runs in background
       - ./monitor # Monitor script
+    chmod_script: # Actual chmod script foreground
+      - ./chmod.sh # chmod script to run
     build_script: # Actual build script foreground
       - ./build.sh # Build script to run
