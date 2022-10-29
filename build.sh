@@ -42,7 +42,9 @@ tg_sendText "Lunching"
 # Normal build steps
 . build/envsetup.sh
 lunch lineage_a10s-userdebug
+export SELINUX_IGNORE_NEVERALLOWS=true
 export ALLOW_MISSING_DEPENDENCIES=true
+export RELAX_USES_LIBRARY_CHECK=true
 export KBUILD_BUILD_USER=ItzKaguya
 export KBUILD_BUILD_HOST=ItzKaguya-PC
 export BUILD_USERNAME=ItzKaguya
