@@ -62,7 +62,7 @@ tg_sendText "Starting Compilation.."
 mka bacon -j10 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom to gdrive"
-curl bashupload.com -T out/target/product/a10s/*.zip aosp:final -P | tee download-link.txt
+curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link.txt
 
 (ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10s/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
