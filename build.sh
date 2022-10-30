@@ -32,7 +32,7 @@ tg_sendText "Syncing rom"
 mkdir -p /tmp/rom
 cd /tmp/rom
 repo init --no-repo-verify --depth=1 -u https://github.com/LineageOS/android.git -b lineage-17.1 -g default,-device,-mips,-darwin,-notdefault
-repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all) || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
+repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
 
 tg_sendText "Downloading trees"
 git clone https://github.com/MizuNotCool/android_device_samsung_a10s device/samsung/a10s
@@ -63,7 +63,7 @@ ccache -z
 
 tg_sendText "Starting Compilation.."
 
-make clean && make bacon -j$(nproc --all) | tee build.txt
+make clean && make bacon -j8 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom"
 curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link.txt
