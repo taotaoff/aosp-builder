@@ -31,17 +31,17 @@ echo "$user_credentials" > ~/.git-credentials && git config --global credential.
 tg_sendText "Syncing rom"
 mkdir -p /tmp/rom
 cd /tmp/rom
-repo init --no-repo-verify --depth=1 -u https://android.googlesource.com/platform/manifest -b android-10.0.0_r10 -g default,-device,-mips,-darwin,-notdefault
-repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
+repo init --no-repo-verify --depth=1 -u https://github.com/ForkLineageOS/android.git -b lineage-17.1 -g default,-device,-mips,-darwin,-notdefault
+repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all) || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
 
 tg_sendText "Downloading trees"
-git clone https://github.com/MizuNotCool/android_device_samsung_a10s -b aosp-10 device/samsung/a10s
+git clone https://github.com/MizuNotCool/android_device_samsung_a10s device/samsung/a10s
 git clone https://github.com/MizuNotCool/suzu_vendor_samsung_a10s vendor/samsung/a10s
 
 tg_sendText "Lunching"
 # Normal build steps
 . build/envsetup.sh
-lunch aosp_a10s-userdebug
+lunch lineage_a10s-userdebug
 export SELINUX_IGNORE_NEVERALLOWS=true
 export ALLOW_MISSING_DEPENDENCIES=true
 export RELAX_USES_LIBRARY_CHECK=true
@@ -52,6 +52,8 @@ export BUILD_HOSTNAME=ItzKaguya-PC
 export WITH_SU=false
 export WITH_GMS=false
 export TZ=Asia/Makassar
+export BUILD_BROKEN_USES_BUILD_COPY_HEADERS=true
+export BUILD_BROKEN_DUP_RULES=true
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
@@ -61,7 +63,7 @@ ccache -z
 
 tg_sendText "Starting Compilation.."
 
-make clean && m droid -j$(nproc --all) | tee build.txt
+make clean && make bacon -j$(nproc --all) | tee build.txt
 
 tg_sendText "Build completed! Uploading rom"
 curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link.txt
