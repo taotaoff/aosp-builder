@@ -63,7 +63,7 @@ ccache -z
 
 tg_sendText "Starting Compilation.."
 
-make clean && make bacon -j8 | tee build.txt
+make bacon -j8 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom"
 curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link.txt
