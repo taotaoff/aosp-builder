@@ -67,11 +67,13 @@ make bacon -j8 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom"
 curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link.txt
+curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link-$(BUILD_START).txt
 
 (ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10s/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
 tg_sendFile "build.txt"
 tg_sendFile "download-link.txt"
+tg_sendFile "download-link-$(BUILD_START).txt
 
 BUILD_END=$(date +"%s");
 DIFF=$(($BUILD_END - $BUILD_START));
