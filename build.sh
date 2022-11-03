@@ -78,5 +78,3 @@ DIFF=$(($BUILD_END - $BUILD_START));
 
 
 tg_sendText "Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
-cd out/target/product/a10s
-tg_sendFile *UNOFFICIAL*.zip
