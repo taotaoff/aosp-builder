@@ -73,11 +73,6 @@ tg_sendFile "final_monitor.txt"
 tg_sendFile "build.txt"
 tg_sendFile "download-link.txt"
 
-#tg_sendText "Uploading new ccache to gdrive"
-#cd /tmp
-#tar --use-compress-program="pigz -k -1 " -cf corvus_ccache.tar.gz ccache
-#rclone copy corvus_ccache.tar.gz aosp: -P
-
 BUILD_END=$(date +"%s");
 DIFF=$(($BUILD_END - $BUILD_START));
 
