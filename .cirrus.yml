@@ -15,7 +15,7 @@ env: # Environment variables to pass to all tasks
     user_pass: "ENCRYPTED[!d20ec5fc87048896befca62f5369d6d88fefacb06e3a266649aa0e7071ba19fcc73673c2899d6efa8c38684fbf86f2f9!]"
 
 task:
-    name: aosp # Project name
+    name: ItzKaguya-BuildGSI # Project name
     timeout_in: 120m # Otherwise it will timeout at 60m automatically, 120m highest in free account
     container:
       image: apon77/aosp:cirrus # It has built-in setup environment + repo, aria2, rclone, pigz, username ci, and email ci@ci.ci [You can use your own docker image if you want, or you can use this one too!]
@@ -23,11 +23,9 @@ task:
       memory: 32G # So that we can have ram when needed, 32G highest. 4G per CPU you use.
     permission_script: # Actual chmod script foreground
       - chmod 777 * # chmod script to run
-    dependencies_script: # Actual build script foreground
-      - ./dependencies.sh # Build script to run
-    monitor_background_script: # To monitor ccache and machine status every minute, runs in background
+    monitoring_background_script: # To monitor ccache and machine status every minute, runs in background
       - ./monitor # Monitor script
     chmod_script: # Actual chmod script foreground
       - ./chmod.sh # chmod script to run
-    build_script: # Actual build script foreground
-      - ./build.sh # Build script to run
+    BuildGSI_script: # Actual build script foreground
+      - ./gsi.sh # Build script to run
