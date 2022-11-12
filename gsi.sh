@@ -27,7 +27,7 @@ export KBUILD_BUILD_USER=ItzKaguya
 export KBUILD_BUILD_HOST=ItzKaguya-PC
 export BUILD_USERNAME=ItzKaguya
 export BUILD_HOSTNAME=ItzKaguya-PC
-bash treble_build_floko/buildbot_unified.sh treble A64B
+bash treble_build_ancient/buildbot_treble.sh
 tg_sendText "Build completed! Uploading rom"
 curl bashupload.com -T ancient-18.1-ItzKaguyaGSI-UNOFFICIAL-suzuhimeSharedSystem.img.xz | tee build-output-ancient.txt
 curl bashupload.com -T ./build-output/ancient-18.1-ItzKaguyaGSI-UNOFFICIAL-suzuhimeSharedSystem.img.xz | tee download-link-ancient.txt
