@@ -16,11 +16,11 @@ BUILD_START=$(date +"%s");
 ls -a
 tg_sendText "Cloning GSI Builds"
 git clone https://github.com/MizuNotCool/treble_build_ancient.git
-mkdir lineage-18.x-build-gsi; cd lineage-18.x-build-gsi
-repo init -u https://github.com/ancient-lab.git -b eleven
+mkdir lineage-17.x-build-gsi; cd lineage-17.x-build-gsi
+repo init -u https://github.com/Ancient-Lab/manifest.git -b ten-weeabo
 git clone https://github.com/MizuNotCool/treble_build_ancient.git
-git clone https://github.com/Ankits-lab/treble_patches -b lineage-18.1
-git clone https://github.com/Ankits-lab/treble_build_los -b lineage-18.1
+git clone https://github.com/Ankits-lab/treble_patches -b lineage-17.1
+git clone https://github.com/Ankits-lab/treble_build_los -b lineage-17.1
 tg_sendText "Prepairing to build GSI"
 tg_sendText "Building..."
 export KBUILD_BUILD_USER=ItzKaguya
