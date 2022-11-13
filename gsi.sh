@@ -28,7 +28,7 @@ sleep 10
 cat download-link-pe
 tg_sendFile "download-link-pe.txt"
 tg_sendText "This link is one-time use, so mirror it first"
-tg_sendText "Build Completed."
+tg_sendText "Build Completed? Maybe not"
 
 BUILD_END=$(date +"%s");
 DIFF=$(($BUILD_END - $BUILD_START));
