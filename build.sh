@@ -35,7 +35,7 @@ repo init --no-repo-verify --depth=1 -u https://github.com/LineageOS/android.git
 repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
 
 tg_sendText "Downloading trees"
-git clone https://github.com/MizuNotCool/android_device_samsung_a10s device/samsung/a10s
+git clone https://github.com/MizuNotCool/android_device_suzuhime device/samsung/a10s
 git clone https://github.com/MizuNotCool/suzu_vendor_samsung_a10s vendor/samsung/a10s
 
 tg_sendText "Lunching"
@@ -63,10 +63,10 @@ ccache -z
 
 tg_sendText "Starting Compilation.."
 
-make bacon -j8 | tee build.txt
+make bacon -j$(nproc --all) | tee build.txt
 
 tg_sendText "Build completed! Uploading rom"
-curl bashupload.com -T ./out/target/product/a10s/*.zip | tee download-link.txt
+curl -T ./out/target/product/a10s/*UNOFFICIAL*.zip temp.sh | tee download-link.txt
 
 (ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10s/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
