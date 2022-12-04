@@ -16,19 +16,15 @@ BUILD_START=$(date +"%s");
 ls -a
 tg_sendText "Cloning GSI Builds"
 mkdir pixel; cd pixel
-git clone https://github.com/MizuNotCool/treble_build_pe.git -b twelve --depth=1
+git clone https://github.com/MizuNotCool/treble_build_miku -b TDA
 tg_sendText "Prepairing to build GSI"
 tg_sendText "Building..."
 BD=/tmp/itzkaguya/builds
 export BD=/tmp/itzkaguya/builds
-bash treble_build_pe/build.sh twelve
+bash treble_build_miku/build.sh
 tg_sendText "Build completed! Uploading rom"
-$BD/PixelExperience-Plus_a64-ab-12.1-ItzKaguyaGSI-UNOFFICIAL.img.xz | tee download-link-pe.txt
+rclone copy $BD/all.7z suzu:
 sleep 10
-cat download-link-pe
-tg_sendFile "download-link-pe.txt"
-tg_sendText "This link is one-time use, so mirror it first"
-tg_sendText "Build Completed? Maybe not"
 
 BUILD_END=$(date +"%s");
 DIFF=$(($BUILD_END - $BUILD_START));
