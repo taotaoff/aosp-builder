@@ -21,6 +21,21 @@ tg_sendText "Prepairing to build GSI"
 tg_sendText "Building..."
 BD=/tmp/itzkaguya/builds
 export BD=/tmp/itzkaguya/builds
+export SELINUX_IGNORE_NEVERALLOWS=true
+export ALLOW_MISSING_DEPENDENCIES=true
+export RELAX_USES_LIBRARY_CHECK=true
+export BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES=true
+export BUILD_BROKEN_MISSING_REQUIRED_MODULES=true
+export BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE=true
+export BUILD_BROKEN_VERIFY_USES_LIBRARIES=true
+export BUILD_BROKEN_USES_BUILD_COPY_HEADERS=true
+export BUILD_BROKEN_DUP_RULES=true
+export BUILD_USERNAME=ItzKaguya
+export BUILD_HOSTNAME=itzkaguya-server
+export KBUILD_BUILD_NAME=ItzKaguya
+export KBUILD_BUILD_HOST=itzkaguya-server
+export BUILD_BROKEN_CLANG_ASFLAGS=true
+export BUILD_BROKEN_CLANG_CFLAGS=true
 bash treble_build_miku/build.sh
 tg_sendText "Build completed! Uploading rom"
 rclone copy $BD/all.7z suzu:
