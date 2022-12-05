@@ -15,8 +15,8 @@ BUILD_START=$(date +"%s");
 
 ls -a
 tg_sendText "Cloning GSI Builds"
-mkdir pixel; cd pixel
-git clone https://github.com/MizuNotCool/treble_build_miku -b TDA
+mkdir evolution; cd evolution
+git clone https://github.com/MizuNotCool/treble_build_evo -b tiramisu
 tg_sendText "Prepairing to build GSI"
 tg_sendText "Building..."
 BD=/tmp/itzkaguya/builds
@@ -36,9 +36,10 @@ export KBUILD_BUILD_NAME=ItzKaguya
 export KBUILD_BUILD_HOST=itzkaguya-server
 export BUILD_BROKEN_CLANG_ASFLAGS=true
 export BUILD_BROKEN_CLANG_CFLAGS=true
-bash treble_build_miku/build.sh
+bash treble_build_evo/build.sh
 tg_sendText "Build completed! Uploading rom"
-rclone copy $BD/all.7z suzu:
+rclone copy $BD/evolution_a64-ab-7.3-ItzKaguya.img.xz suzu:
+rclone copy $BD/evolution_a64-ab-vndklite-7.3-ItzKaguya.img.xz suzu:
 sleep 10
 
 BUILD_END=$(date +"%s");
