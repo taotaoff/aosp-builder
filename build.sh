@@ -1,4 +1,5 @@
 #!/bin/bash
+# AOSP Builder by ItzKaguya
 
 function tg_sendText() {
 curl -s "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
