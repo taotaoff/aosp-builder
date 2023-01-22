@@ -10,9 +10,9 @@ env: # Environment variables to pass to all tasks
     BOT_TOKEN: "ENCRYPTED[!a260400c07cb89b7f163db0195cb6b877bd7c796d5c15f562be741143f1141d0626acd28b5d3686b7d4575fc4ab06de5!]"
     
     # Github variables needed so as to be able to clone private repos too without authenticating. Useful for building official roms which have private repos. The first 3 variables needs to be encrypted!! You can hide your email and username by encrypting them too if you want but that's not neccessary.
-    user_email: "itzkaguya@suzunetwork.net"
-    user_name: "MizuNotCool"
-    user_pass: "ENCRYPTED[!d20ec5fc87048896befca62f5369d6d88fefacb06e3a266649aa0e7071ba19fcc73673c2899d6efa8c38684fbf86f2f9!]"
+    user_email: "aryasukanadi098@gmail.com"
+    user_name: "Hirozuto"
+    user_pass: ""
 
 task:
     name: ItzKaguya-BuildGSI # Project name
