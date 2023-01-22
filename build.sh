@@ -34,14 +34,14 @@ cd /tmp/rom
 repo init --no-repo-verify --depth=1 -u https://github.com/LineageOS/android.git -b lineage-17.1 -g default,-device,-mips,-darwin,-notdefault
 repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
 
-tg_sendText "Downloading trees"
+tg_sendText "Downloading trees (Xiaomi Mi439)"
 git clone https://github.com/MizuNotCool/android_device_suzuhime device/samsung/a10s
 git clone https://github.com/MizuNotCool/suzu_vendor_samsung_a10s vendor/samsung/a10s
 
 tg_sendText "Lunching"
 # Normal build steps
 . build/envsetup.sh
-lunch lineage_a10s-userdebug
+lunch shirayuki_mi439-userdebug
 export SELINUX_IGNORE_NEVERALLOWS=true
 export ALLOW_MISSING_DEPENDENCIES=true
 export RELAX_USES_LIBRARY_CHECK=true
@@ -63,10 +63,10 @@ ccache -z
 
 tg_sendText "Starting Compilation.."
 
-make bacon -j$(nproc --all) | tee build.txt
+mka shirayuki -j$(nproc --all) | tee build.txt
 
 tg_sendText "Build completed! Uploading rom"
-curl -T ./out/target/product/a10s/*UNOFFICIAL*.zip temp.sh | tee download-link.txt
+curl -T ./out/target/product/mi439/*UNOFFICIAL*.zip temp.sh | tee download-link.txt
 
 (ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10s/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
