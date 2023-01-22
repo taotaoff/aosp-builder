@@ -72,7 +72,7 @@ tg_sendText "Starting Compilation.."
 mka shirayuki -j10 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom to gdrive"
-rclone copy out/target/product/mi439/*Unofficial* suzu:segawa-builds -P || rclone copy out/target/product/mi439/*Alpha*.zip suzu:segawa-builds -P || rclone copy out/target/product/mi439/Shirayuki*.zip suzu:segawa-builds -P
+rclone copy out/target/product/mi439/*UNOFFICIAL* suzu:segawa-builds -P || rclone copy out/target/product/mi439/*mi439*.zip suzu:segawa-builds -P || rclone copy out/target/product/mi439/Shirayuki*.zip suzu:segawa-builds -P
 
 (ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
