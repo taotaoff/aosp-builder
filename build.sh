@@ -41,7 +41,7 @@ git clone https://github.com/ShirayukiProject-Devices/android_kernel_xiaomi_sdm4
 git clone https://github.com/ShirayukiProject-Devices/android_vendor_xiaomi_mi439 vendor/xiaomi/mi439
 git clone https://github.com/ShirayukiProject-Devices/android_vendor_xiaomi_sdm439-common vendor/xiaomi/sdm439-common
 
-tg_sendText "Lunching"
+tg_sendText "Lunching (lunch shirayuki_mi439-userdebug)"
 # Normal build steps
 . build/envsetup.sh
 lunch shirayuki_mi439-userdebug
@@ -67,7 +67,7 @@ ccache -M 20G
 ccache -o compression=true
 ccache -z
 
-tg_sendText "Starting Compilation.."
+tg_sendText "Starting Compilation (mka shirayuki)"
 
 mka shirayuki -j10 | tee build.txt
 
