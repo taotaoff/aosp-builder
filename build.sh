@@ -33,7 +33,7 @@ tg_sendText "Syncing rom (ShirayukiProject Tsushima 13)"
 mkdir -p /tmp/rom
 cd /tmp/rom
 repo init --no-repo-verify --depth=1 -u https://github.com/shirayuki-prjkt/yuki_manifest.git -b tsushima-13 -g default,-device,-mips,-darwin,-notdefault
-repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
+repo sync -c --force-sync --no-tags --no-clone-bundle -j6 --optimized-fetch --prune || repo sync -c --force-sync --no-tags --no-clone-bundle -j8 --optimized-fetch --prune
 
 tg_sendText "Downloading trees (Xiaomi Mi439)"
 git clone https://github.com/ShirayukiProject-Devices/android_device_xiaomi_mi439 device/xiaomi/mi439
