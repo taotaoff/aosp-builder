@@ -27,7 +27,7 @@ task:
       - ./monitor # Monitor script
     chmod_script: # Actual chmod script foreground
       - ./chmod.sh # chmod script to run
-    BuildGSI_script: # Actual build script foreground
+    Build_script: # Actual build script foreground
       - ./build.sh # Build script to run
     Upload_script: 
       - ./upload.sh
