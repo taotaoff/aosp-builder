@@ -70,7 +70,8 @@ ccache -z
 
 tg_sendText "Starting Compilation (mka shirayuki)"
 
-mka shirayuki -j10 | tee build.txt
+make clean
+mka shirayuki -j10
 rm -rf /tmp/rom/packages/apps/Settings/ShirayukiDashboard
 git clone https://github.com/shirayuki-prjkt/platform_packages_apps_ShirayukiDashboard /tmp/rom/packages/apps/Settings/ShirayukiDashboard
 mka shirayuki -j10 | tee build.txt
