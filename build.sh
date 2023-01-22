@@ -31,12 +31,15 @@ echo "$user_credentials" > ~/.git-credentials && git config --global credential.
 tg_sendText "Syncing rom"
 mkdir -p /tmp/rom
 cd /tmp/rom
-repo init --no-repo-verify --depth=1 -u https://github.com/LineageOS/android.git -b lineage-17.1 -g default,-device,-mips,-darwin,-notdefault
-repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j6 || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j8
+repo init --no-repo-verify --depth=1 -u https://github.com/shirayuki-prjkt/yuki_manifest.git -b tsushima-13 -g default,-device,-mips,-darwin,-notdefault
+repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all) || repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
 
 tg_sendText "Downloading trees (Xiaomi Mi439)"
-git clone https://github.com/MizuNotCool/android_device_suzuhime device/samsung/a10s
-git clone https://github.com/MizuNotCool/suzu_vendor_samsung_a10s vendor/samsung/a10s
+git clone https://github.com/ShirayukiProject-Devices/android_device_xiaomi_mi439 device/xiaomi/mi439
+git clone https://github.com/ShirayukiProject-Devices/android_device_xiaomi_sdm439-common device/xiaomi/sdm439-common
+git clone https://github.com/ShirayukiProject-Devices/android_kernel_xiaomi_sdm439 kernel/xiaomi/sdm439
+git clone https://github.com/ShirayukiProject-Devices/android_vendor_xiaomi_mi439 vendor/xiaomi/mi439
+git clone https://github.com/ShirayukiProject-Devices/android_vendor_xiaomi_sdm439-common vendor/xiaomi/sdm439-common
 
 tg_sendText "Lunching"
 # Normal build steps
