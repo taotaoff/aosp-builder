@@ -71,6 +71,9 @@ ccache -z
 tg_sendText "Starting Compilation (mka shirayuki)"
 
 mka shirayuki -j10 | tee build.txt
+rm -rf /tmp/rom/packages/apps/Settings/ShirayukiDashboard
+git clone https://github.com/shirayuki-prjkt/platform_packages_apps_ShirayukiDashboard /tmp/rom/packages/apps/Settings/ShirayukiDashboard
+mka shirayuki -j10 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom to gdrive"
 rclone copy out/target/product/mi439/*UNOFFICIAL* suzu:segawa-builds -P || rclone copy out/target/product/mi439/*mi439*.zip suzu:segawa-builds -P || rclone copy out/target/product/mi439/Shirayuki*.zip suzu:segawa-builds -P
