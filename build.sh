@@ -32,20 +32,15 @@ echo "$user_credentials" > ~/.git-credentials && git config --global credential.
 tg_sendText "Syncing rom (ShirayukiProject Tsushima 13)"
 mkdir -p /tmp/rom
 cd /tmp/rom
-repo init --no-repo-verify --depth=1 -u https://github.com/shirayuki-prjkt/yuki_manifest.git -b tsushima-13 -g default,-device,-mips,-darwin,-notdefault
+repo init --depth=1 --git-lfs --no-repo-verify -u https://github.com/VoltageOS/manifest.git -b 13 -g default,-mips,-darwin,-notdefault
+git clone https://github.com/taotaoff/local_manifest.git --depth 1 -b master .repo/local_manifests
 repo sync -c --force-sync --no-tags --no-clone-bundle -j6 --optimized-fetch --prune || repo sync -c --force-sync --no-tags --no-clone-bundle -j8 --optimized-fetch --prune
 
-tg_sendText "Downloading trees (Xiaomi Mi439)"
-git clone https://github.com/ShirayukiProject-Devices/android_device_xiaomi_mi439 device/xiaomi/mi439
-git clone https://github.com/ShirayukiProject-Devices/android_device_xiaomi_sdm439-common device/xiaomi/sdm439-common
-git clone https://github.com/ShirayukiProject-Devices/android_kernel_xiaomi_sdm439 kernel/xiaomi/sdm439
-git clone https://github.com/ShirayukiProject-Devices/android_vendor_xiaomi_mi439 vendor/xiaomi/mi439
-git clone https://github.com/ShirayukiProject-Devices/android_vendor_xiaomi_sdm439-common vendor/xiaomi/sdm439-common
+tg_sendText "Lunching (lunch moba-userdebug)"
 
-tg_sendText "Lunching (lunch shirayuki_mi439-userdebug)"
 # Normal build steps
 . build/envsetup.sh
-lunch shirayuki_mi439-userdebug
+lunch voltageos_moba-userdebug
 export SELINUX_IGNORE_NEVERALLOWS=true
 export ALLOW_MISSING_DEPENDENCIES=true
 export RELAX_USES_LIBRARY_CHECK=true
@@ -55,38 +50,35 @@ export BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE=true
 export BUILD_BROKEN_VERIFY_USES_LIBRARIES=true
 export BUILD_BROKEN_USES_BUILD_COPY_HEADERS=true
 export BUILD_BROKEN_DUP_RULES=true
-export BUILD_USERNAME=segawa
-export BUILD_HOSTNAME=itzkaguya-server
-export KBUILD_BUILD_NAME=segawa
-export KBUILD_BUILD_HOST=itzkaguya-server
+export BUILD_USERNAME=taotao
+export BUILD_HOSTNAME=taotao-server
+export KBUILD_BUILD_NAME=taotao
+export KBUILD_BUILD_HOST=taotao-server
 export BUILD_BROKEN_CLANG_ASFLAGS=true
 export BUILD_BROKEN_CLANG_CFLAGS=true
 export USE_CCACHE=1
 export CCACHE_COMPRESS=1
-export TZ=Asia/Makassar
-ccache -M 20G
+export TZ=America/Sao_Paulo
+ccache -M 14G
 ccache -o compression=true
 ccache -z
 
-tg_sendText "Starting Compilation (mka shirayuki)"
+tg_sendText "Starting Compilation (mka moba)"
 
 make clean
-mka shirayuki -j10
-rm -rf /tmp/rom/packages/apps/Settings/ShirayukiDashboard
-git clone https://github.com/shirayuki-prjkt/platform_packages_apps_ShirayukiDashboard /tmp/rom/packages/apps/Settings/ShirayukiDashboard
-mka shirayuki -j10 | tee build.txt
+mka moba -j10 | tee build.txt
 
 tg_sendText "Build completed! Uploading rom to gdrive"
-rclone copy out/target/product/mi439/*UNOFFICIAL* suzu:segawa-builds -P || rclone copy out/target/product/mi439/*mi439*.zip suzu:segawa-builds -P || rclone copy out/target/product/mi439/Shirayuki*.zip suzu:segawa-builds -P
+rclone copy out/target/product/moba/*UNOFFICIAL* suzu:segawa-builds -P || rclone copy out/target/product/moba/*moba*.zip suzu:segawa-builds -P || rclone copy out/target/product/moba/*.zip suzu:segawa-builds -P
 
-(ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a10/) | tee final_monitor.txt
+(ccache -s && echo " " && free -h && echo " " && df -h && echo " " && ls -a out/target/product/a13/) | tee final_monitor.txt
 tg_sendFile "final_monitor.txt"
 tg_sendFile "build.txt"
 
 #tg_sendText "Uploading new ccache to gdrive"
 #cd /tmp
-#tar --use-compress-program="pigz -k -1 " -cf corvus_ccache.tar.gz ccache
-#rclone copy corvus_ccache.tar.gz aosp: -P
+#tar --use-compress-program="pigz -k -1 " -cf voltage_ccache.tar.gz ccache
+rclone copy voltage_ccache.tar.gz aosp: -P
 
 BUILD_END=$(date +"%s");
 DIFF=$(($BUILD_END - $BUILD_START));
